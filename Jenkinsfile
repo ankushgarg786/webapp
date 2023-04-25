@@ -1,24 +1,16 @@
 pipeline {
-    agent {
-        label 'master'
-    }
+agent any
+ 
     stages {
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
             }
         }
-//         stage('Sonar-Report') {
-//             steps {
-//             sh 'mvn sonar:sonar \
-//   -Dsonar.projectKey=jenkins_project \
-//   -Dsonar.host.url=http://localhost:9000 \
-//   -Dsonar.login=5f09ded7e5db4d0ea0dcfd937c181af706e60475'
-//             }
-//         }
+
         stage('Test') { 
             steps {
-                bat 'mvn test' 
+                sh 'mvn test' 
             }
             post {
                 always {
@@ -26,7 +18,18 @@ pipeline {
                 }
             }
         }
-        
-        }
-    }
-
+     stage('deploy') { 
+            steps {
+               sh 'mvn verify' 
+            }
+     }
+//    stage('SonarQube Analysis') {
+//     steps{
+//      sh 'mvn clean verify sonar:sonar \
+//   -Dsonar.projectKey=Vansh_webapp1 \
+//   -Dsonar.host.url=http://localhost:9000 \
+//   -Dsonar.login=sqp_c70b7221e6960f24ab72230ff25f36c22d491a34'
+//     }
+//   }
+ }
+}
