@@ -24,7 +24,7 @@ agent any
         }
      stage('deploy') { 
             steps {
-               bat 'mvn verify' 
+               bat 'mvn clean deploy' 
             }
      }
 //    stage('SonarQube Analysis') {
