@@ -10,7 +10,7 @@ agent any
 
         stage('Test') { 
             steps {
-                sh 'mvn test' 
+                bat 'mvn test' 
             }
             post {
                 always {
@@ -20,7 +20,7 @@ agent any
         }
      stage('deploy') { 
             steps {
-               sh 'mvn verify' 
+               bat 'mvn verify' 
             }
      }
 //    stage('SonarQube Analysis') {
